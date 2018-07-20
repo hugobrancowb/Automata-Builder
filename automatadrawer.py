@@ -4,26 +4,30 @@
 # Graphviz with Python
 #   https://graphviz.readthedocs.io/en/stable/
 
-# Digraph é um grafo direcionado
+# Import graphviz
 from graphviz import Digraph
 
-dot = Digraph('Gerador de autômatos', filename='automato-gerado')
+dot = Digraph('automata drawer', filename='automato-gerado')
 
 dot.attr(rankdir='LR')
 
 dot.attr('node', shape='circle')
 dot.attr('edge', arrowsize='0.8')
 
-dot.node('inicio', '', shape='plaintext')
+# 'nullplace' is a invisible node created so we can put an arrow pointing to the automata's start place
+dot.node('nullplace', '', shape='plaintext')
 
 with open("02-teste-AFND.txt","r") as data:
+    # Find where the line where we say the place the automata begins
     for line in data:
         if line.strip() == "#S":
             break
     
+    # Gets that place and points an arrow to it
     firststate = data.readline().rstrip()
-    dot.edge('inicio', firststate, shape='invis')
+    dot.edge('nullplace', firststate, shape='invis')
 
+    # Find where the line where we say the place or places the automata ends
     for line in data:
         if line.strip() == "#F":
             break
@@ -31,7 +35,7 @@ with open("02-teste-AFND.txt","r") as data:
     for state in data.readline().rstrip().split():
         dot.node(state, state, shape='doublecircle')
 
-    # Encontrar início das transições
+    # Find where the line where we list all automata's transitions
     for line in data:
         if line.strip() == "#D":
             break
