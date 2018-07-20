@@ -7,7 +7,7 @@
 # Import graphviz
 from graphviz import Digraph
 
-dot = Digraph('automata drawer', filename='automato-gerado')
+dot = Digraph('automata drawer', filename='automata')
 
 dot.attr(rankdir='LR')
 
@@ -50,4 +50,4 @@ with open("02-teste-AFND.txt","r") as data:
 
         dot.edge(ei, ef, label=le)
 
-dot.render(view=True)
+dot.render()
