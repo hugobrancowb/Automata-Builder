@@ -15,9 +15,12 @@ dot.attr('node', shape='circle')
 dot.attr('edge', arrowsize='0.8')
 
 # 'nullplace' is a invisible node created so we can put an arrow pointing to the automata's start place
-dot.node('nullplace', '', shape='plaintext')
+dot.node('nullplace', '', shape='plaintext', fixedsize='shape', width='0.01')
 
-with open("02-teste-AFND.txt","r") as data:
+transitions = []
+ignore = []
+
+with open("01-teste-AFD.txt","r") as data:
     # Find where the line where we say the place the automata begins
     for line in data:
         if line.strip() == "#S":
@@ -25,7 +28,7 @@ with open("02-teste-AFND.txt","r") as data:
     
     # Gets that place and points an arrow to it
     firststate = data.readline().rstrip()
-    dot.edge('nullplace', firststate, shape='invis')
+    dot.edge('nullplace', firststate)
 
     # Find where the line where we say the place or places the automata ends
     for line in data:
@@ -48,6 +51,19 @@ with open("02-teste-AFND.txt","r") as data:
         
         ei, le, ef = line.split()
 
-        dot.edge(ei, ef, label=le)
+        transitions.append([ei, le, ef])
+
+# Merge paths with same begining and ending
+for i in range(len(transitions)):
+    ei, le, ef = transitions[i]
+
+    for j in range(i-1, 0, -1):
+        if ei == transitions[j][0] and ef == transitions[j][2]:
+            transitions[j][1] += ', ' + le
+            ignore.append(transitions[i])    
+
+for i in range(len(transitions)):
+    if transitions[i] not in ignore:
+        dot.edge(transitions[i][0], transitions[i][2], label=transitions[i][1])
 
 dot.render()
