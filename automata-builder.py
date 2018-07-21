@@ -7,7 +7,7 @@
 # Import graphviz
 from graphviz import Digraph
 
-dot = Digraph('automata drawer', filename='automata')
+dot = Digraph('automata-builder', filename='automata')
 
 dot.attr(rankdir='LR')
 
