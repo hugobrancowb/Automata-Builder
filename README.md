@@ -4,6 +4,7 @@ Program that reads a text file that represents an automata and builds a graphica
 * Input format
 The automata must match the format proposed by Prof. Dr. Ruben Carlo Benante <rcb@upe.br>, as shown below:
 
+```
     #K
     3
     #A
@@ -19,6 +20,7 @@ The automata must match the format proposed by Prof. Dr. Ruben Carlo Benante <rc
     1 b 1
     2 a 1
     2 b 2
+```
 
 Where K represents the number of places, A represents the "biggest" letter from the alfabet, S represents the initial state, F represents the final place or places of the automata (in case of more than one state, they must be separated by single spaces) and D represents the transitions.
 
