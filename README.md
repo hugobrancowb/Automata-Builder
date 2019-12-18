@@ -22,7 +22,7 @@ The automata must match the format proposed by Prof. Dr. Ruben Carlo Benante <rc
     2 b 2
 ```
 
-Where K represents the number of places, A represents the "biggest" letter from the alfabet, S represents the initial state, F represents the final place or places of the automata (in case of more than one state, they must be separated by single spaces) and D represents the transitions.
+Where **K** represents the number of places, **A** represents the "greater" letter from the alfabet, **S** represents the initial state, **F** represents the final place or places of the automata (in case of more than one state, they must be separated by single spaces) and **D** represents the transitions.
 
 * How to run the code
 
